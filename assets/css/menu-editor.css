@@ -1,0 +1,82 @@
+/**
+* #.# Section Dashboard Menu Editor CSS
+*
+* This section includes css related to dashboard admin panel.
+*/
+
+.menu-editor-rows,
+.submenu-editor-rows {
+    background: #ccc;
+    border: 1px solid #000;
+}
+
+.menu-editor-rows {
+    height: 40px;
+}
+
+.submenu-editor-rows {
+    height: 35px;
+}
+
+#responseOptions {
+    text-align: center;
+    width: 50%;
+    float: left;
+}
+
+.submenusoptions {
+    display: none;
+    text-align: center;
+}
+
+.display-block {
+    width: 50%;
+    float: right;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.submenu-items table {
+    width: 90%;
+    margin : 10px 5%;
+    border: 2px dashed #fff;
+}
+
+.submenu-items table tbody tr td {
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.submenu-items table tbody tr:last-child td {
+    border: none;
+}
+
+.bp-dashboard-row {
+    clear: both;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+
+.bp-dashboard-submit1 {
+    float: right;
+    margin-right: 20px!important;
+}
+
+.menu-items{
+    text-align: center;
+    font-weight: 700;
+}
+
+@media( max-width: 767px ) {
+    .bp-dashboard-submit1 {
+        display: none!important;
+    }
+    #responseOptions {
+        width: 97%;
+    }
+}
