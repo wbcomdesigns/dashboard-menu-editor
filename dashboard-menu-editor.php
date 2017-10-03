@@ -18,6 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+define( 'DBME_PLUGIN_PATH', plugin_dir_path(__FILE__) );
+define( 'DBME_PLUGIN_URL', plugin_dir_url(__FILE__) );
+define( 'DBME_TEXT_DOMAIN', 'wb-dashboard-menu-editor' );
+
 /**
  * Constants used in the plugin
  *  @since   1.0.0
@@ -79,9 +83,9 @@ if( !class_exists('Menu_Editor') ) {
                         if ( !wp_script_is( 'jquery-ui-sortable', 'enqueued' ) ) {
                             wp_enqueue_script( 'jquery-ui-sortable' );
                         }
-			wp_enqueue_script('menu-editor-js',plugins_url().'/dashboard-menu-editor/assets/js/menu-editor.js',array(), $this->version, false);
+			wp_enqueue_script('menu-editor-js',DBME_PLUGIN_URL.'/assets/js/menu-editor.js',array(), $this->version, false);
 			wp_localize_script( 'menu-editor-js', 'ajax_object',array( 'ajax_url' => admin_url('admin-ajax.php')));
-			wp_enqueue_style('menu-editor-css',plugins_url().'/dashboard-menu-editor/assets/css/menu-editor.css',array(), $this->version, 'all');
+			wp_enqueue_style('menu-editor-css',DBME_PLUGIN_URL.'/assets/css/menu-editor.css',array(), $this->version, 'all');
 		}
 		
                 /** saves details for menu orderings
