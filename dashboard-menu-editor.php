@@ -41,6 +41,7 @@ if( !class_exists('Menu_Editor') ) {
                  */
             
 		public function __construct(){
+			$this->version = '1.0.0';
 			add_action('admin_menu', array($this,'admin_menu_editor_page'));
 			add_action('admin_init',array($this,'enqueue_plugin_scripts'));
 			add_action('wp_ajax_custom_order',array($this,'custom_menu_orders'));
@@ -78,9 +79,9 @@ if( !class_exists('Menu_Editor') ) {
                         if ( !wp_script_is( 'jquery-ui-sortable', 'enqueued' ) ) {
                             wp_enqueue_script( 'jquery-ui-sortable' );
                         }
-			wp_enqueue_script('menu-editor-js',plugins_url().'/dashboard-menu-editor/assets/js/menu-editor.js');
+			wp_enqueue_script('menu-editor-js',plugins_url().'/dashboard-menu-editor/assets/js/menu-editor.js',array(), $this->version, false);
 			wp_localize_script( 'menu-editor-js', 'ajax_object',array( 'ajax_url' => admin_url('admin-ajax.php')));
-			wp_enqueue_style('menu-editor-css',plugins_url().'/dashboard-menu-editor/assets/css/menu-editor.css');
+			wp_enqueue_style('menu-editor-css',plugins_url().'/dashboard-menu-editor/assets/css/menu-editor.css',array(), $this->version, 'all');
 		}
 		
                 /** saves details for menu orderings
