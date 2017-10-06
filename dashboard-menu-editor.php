@@ -38,17 +38,18 @@ if( !class_exists('Menu_Editor') ) {
 
 	class Menu_Editor{
 
-                /** constructor to load all the functionality
-                 *  @since   1.0.0
-                 *  @access   public
-                 *  @author  Wbcom Designs
-                 */
+    /** constructor to load all the functionality
+     *  @since   1.0.0
+     *  @access   public
+     *  @author  Wbcom Designs
+     */
 
 		public function __construct(){
 			$this->version = '1.0.0';
 			add_action('admin_menu', array($this,'admin_menu_editor_page'));
 			add_action('admin_init',array($this,'enqueue_plugin_scripts'));
 			add_action('wp_ajax_custom_order',array($this,'custom_menu_orders'));
+			add_action('wp_ajax_reorder',array($this,'custom_menu_reorders'));
 			add_filter('custom_menu_order', array($this,'custom_order'));
 			add_filter('menu_order', array($this,'custom_order'),999);
 			add_action('plugins_loaded',array($this,'wb_dashboard_setup_textdomain'));
@@ -62,81 +63,84 @@ if( !class_exists('Menu_Editor') ) {
 		  //if not load from languages directory of plugin
 		  load_plugin_textdomain( 'wb-dashboard-menu-editor', false, basename( dirname( __FILE__ ) ) . '/languages' );
 		}
-		
+
 		/** Adds admin menu to view settings of plugin
-                 *  @since   1.0.0
-                 *  @access   public
-                 *  @author  Wbcom Designs
-                 */
+     *  @since   1.0.0
+     *  @access   public
+     *  @author  Wbcom Designs
+     */
 
 		public function admin_menu_editor_page(){
 			add_menu_page( 'Menu Editor', 'Menu Editor', 'manage_options', 'menu-editor', array($this,'menu_editor_settings') );
 		}
 
-                /** settings for plugin
-                 *  @since   1.0.0
-                 *  @access   public
-                 *  @author  Wbcom Designs
-                 */
+    /** settings for plugin
+     *  @since   1.0.0
+     *  @access   public
+     *  @author  Wbcom Designs
+     */
 
 		public function menu_editor_settings(){
 			include_once('includes/admin-options.php');
 		}
 
-                /** Enqueue scripts
-                 *  @since   1.0.0
-                 *  @access   public
-                 *  @author  Wbcom Designs
-                 */
+    /** Enqueue scripts
+     *  @since   1.0.0
+     *  @access   public
+     *  @author  Wbcom Designs
+     */
 
 		public function enqueue_plugin_scripts(){
-                        if ( !wp_script_is( 'jquery-ui-sortable', 'enqueued' ) ) {
-                            wp_enqueue_script( 'jquery-ui-sortable' );
-                        }
+      if ( !wp_script_is( 'jquery-ui-sortable', 'enqueued' ) ) {
+          wp_enqueue_script( 'jquery-ui-sortable' );
+      }
 			wp_enqueue_script('menu-editor-js',DBME_PLUGIN_URL.'/assets/js/menu-editor.js',array(), $this->version, false);
 			wp_localize_script( 'menu-editor-js', 'ajax_object',array( 'ajax_url' => admin_url('admin-ajax.php')));
 			wp_enqueue_style('menu-editor-css',DBME_PLUGIN_URL.'/assets/css/menu-editor.css',array(), $this->version, 'all');
 		}
 
-                /** saves details for menu orderings
-                 *  @since   1.0.0
-                 *  @access   public
-                 *  @author  Wbcom Designs
-                 */
+    /** saves details for menu orderings
+     *  @since   1.0.0
+     *  @access   public
+     *  @author  Wbcom Designs
+     */
 
 		public function custom_menu_orders() {
 			$subids = array();
-                        $subids = filter_var_array( $_POST['subid'], FILTER_SANITIZE_STRING );
+      $subids = filter_var_array( $_POST['subid'], FILTER_SANITIZE_STRING );
 			$ids = array();
 			$ids = filter_var_array( $_POST['id'], FILTER_SANITIZE_STRING );
 			update_option('custom_ordering', $ids );
 			$custom_menu = get_option('custom_ordering');
 			update_option('custom_subordering', $subids );
-                        _e( 'inserted', WP_DME_DOMAIN );
+      _e( 'inserted', WP_DME_DOMAIN );
 			die;
 		}
 
-                /** Send out custom menu as well as submenu order
-                 *  @since   1.0.0
-                 *  @access   public
-                 *  @author  Wbcom Designs
-                 */
+		public function custom_menu_reorders(){
+			update_option('custom_ordering', '' );
+			update_option('custom_subordering', '' );
+			die;
+		}
 
+    /** Send out custom menu as well as submenu order
+     *  @since   1.0.0
+     *  @access   public
+     *  @author  Wbcom Designs
+     */
 		public function custom_order($menu_ord) {
 			global $submenu;
-
 			if (!$menu_ord) {
-                            return true;
-                        }
+      	return true;
+      }
 			$custom_menu = array();
 			$custom_menu = get_option('custom_ordering');
 			$custom_sub = array();
 			if( !empty( $custom_menu ) ) {
-                            $menu_ord = $custom_menu;
+      	$menu_ord = $custom_menu;
 			}
 			$arr = array();
 			$custom_sub = get_option('custom_subordering');
-
 			if( !empty( $custom_sub ) ) {
 				foreach( $submenu as $s_key => $s_val ) {
 					$submenu_sequence = array();

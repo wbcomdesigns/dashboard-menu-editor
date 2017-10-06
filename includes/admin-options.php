@@ -9,7 +9,7 @@ $submenu_items = array();
 <form method="post">
 <div class="bp-dashboard-row">
     <h1><?php _e( 'Menu Editor Settings', WP_DME_DOMAIN );?></h1>
-
+		</div>
         <table id="responseOptions">
             <tbody>
                 <?php foreach( $menu as $key=>$value ): ?>
@@ -40,7 +40,14 @@ $submenu_items = array();
                 <?php endforeach;?>
             </tbody>
         </table>
-        <input type='button' value="<?php _e( 'Save Menus', WP_DME_DOMAIN ); ?>" class="button button-primary menu_edit bp-dashboard-submit1" name="save_menus"/>
-</div>
-<input type='button' value="<?php _e( 'Save Menus', WP_DME_DOMAIN ); ?>" class="button button-primary menu_edit bp-dashboard-submit2" name="save_menus"/>
+				<div class="button_2">
+				<div class="save_menu_button1">
+					<input type='button' value="<?php _e( 'Save Menus', WP_DME_DOMAIN ); ?>" class="button button-primary menu_edit bp-dashboard-submit1" name="save_menus"/>
+					<img src = <?php echo DBME_PLUGIN_URL.'/assets/spinner.gif';?> class='loader-icon'>
+				</div>
+				<div class="reset_button">
+					<input type='button' value="<?php _e( 'Reset', WP_DME_DOMAIN ); ?>" class="button button-primary menu_default bp-dashboard-submit2" name="default_menus"/>
+					<img src = <?php echo DBME_PLUGIN_URL.'/assets/spinner.gif';?> class='loader-icon-reset'>
+				</div>
+			</div>
 </form>
