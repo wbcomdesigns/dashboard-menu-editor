@@ -1,13 +1,13 @@
 <?php
  /*
- * Plugin Name: WB Dashboard Menu Editor
- * Plugin URI: http://www.wbcomdesigns.com
+ * Plugin Name: WBCOM Dashboard Menu Editor
+ * Plugin URI: https://wbcomdesigns.com/downloads
  * Description: provides solution to change positions of admin panel menus & submenus.
  * Version: 1.0.0
  * Tags: admin menu, wp dashboard menu, menu reorder
  * Author: Wbcom Designs
- * Author URI: http://www.wbcomdesigns.com
- * Tested up to: 4.8
+ * Author URI: https://wbcomdesigns.com
+ * Tested up to: 4.8.2
  * Stable tag: 1.0.0
  * License: GPL2
  * http://www.gnu.org/licenses/gpl-2.0.html
